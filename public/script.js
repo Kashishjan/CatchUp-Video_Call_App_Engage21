@@ -8,7 +8,11 @@ const myVideo=document.createElement('video');
 myVideo.muted = true;
 
 let myVideoStream
-var peer =new Peer();
+var peer =new Peer(undefined, {
+    path:'/peerjs',
+    host: '/',
+    port: '443'
+});
 
 // To access user media i.e. the camera and microphone
 navigator.mediaDevices.getUserMedia({
