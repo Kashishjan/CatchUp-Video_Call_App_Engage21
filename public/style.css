@@ -6,6 +6,7 @@ body{
 #video-grid{
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 video{
@@ -20,13 +21,13 @@ video{
 }
 
 .main__left{
-    flex: 0.8;
+    flex: 0.6;
     display: flex;
     flex-direction: column;
 }
 
 .main__right{
-    flex: 0.2;
+    flex: 0.4;
 }
 
 .main__videos{
@@ -35,6 +36,7 @@ video{
     background-color:black;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .main__controls{
@@ -114,6 +116,34 @@ video{
 .unmute, .stop{
     color: red;
 }
+
+#message-container {
+    width: 40%;
+    max-width: 1200px;
+  }
+
+  #message-container div {
+    background-color: #CCC;
+    padding: 5px;
+  }
+
+  #message-container div:nth-child(2n) {
+    background-color: #FFF;
+  }
+
+  #send-container {
+    position: fixed;
+    padding-bottom: 30px;
+    bottom: 0;
+    background-color: white;
+    max-width: 1200px;
+    width: 40%;
+    display: flex;
+  }
+
+  #message-input {
+    flex-grow: 1;
+  }
 
 
 
