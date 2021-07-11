@@ -39,8 +39,9 @@ To run the app on local after clone the repository, follow these steps:
 
 # Agile 101 Methadology Used
 Agile is the ability to create and respond to change. It is a way of dealing with, and ultimately succeeding in, an uncertain and turbulent environment. I foolowed the Agile Approach in this project following:
-1. Dividing the project timeline into one week sprints (subtasks) so as to get a tangible output at the end of each sprint.
+1. Prepared an Excel Sheet to divide the project timeline into smaller sprints (subtasks) so as to get a tangible output at the end of each sprint.
 2. Constant interaction with Microsoft mentor and making changes after their feedback (role of customer here).
 3. On the code level, writing code in functions so that changing and debugging them becomes easier.
-4. Being felxoble to learn new things.
+4. Managing Backlog: Bug Fixing and Deliverables
+5. Being felxible to learn new things.
 
