@@ -21,7 +21,7 @@ This application supports features like:
 The working demo of CathUp can be tried at https://fathomless-wave-21178.herokuapp.com/  
 After Login, share the room link with other participants for them to join.
 
-![Screenshot](Screenshot (135).png)
+![Screenshot](/Screenshot (135).png)
 
 # Instructions After Cloning the Respository
 To run the app on local after clone the repository, follow these steps:
