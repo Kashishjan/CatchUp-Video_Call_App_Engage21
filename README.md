@@ -27,12 +27,14 @@ After Login, share the room link with other participants for them to join.
 To run the app on local after clone the repository, follow these steps:
 1. ```npm install express```
 2. Open the public folder >> script.js file. Then paste the following code in exchange of lines 8-13:
-   ```var peer = new Peer();
+   ```
+    var peer = new Peer();
     /*var peer =new Peer(undefined, {
     path:'/peerjs',
     host: '/',
     port: '443'
-    });```
+    });
+    ```
 3. Run the command ```Nodemon server.js``` on the terminal
 
 # Agile 101 Methadology Used
