@@ -14,12 +14,9 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use('/peerjs', peerServer);
 
-/*app.get('/', (req,res) => {
-    res.redirect(`/${uuidv4()}`);
-}) */
-
 const visited =[]
 
+//To render login page
 app.get('/', (req, res) => {
     res.render('index');
   });
@@ -28,6 +25,7 @@ app.get("/:room", function(req, res){
     res.render("room", {roomId: req.params.room, visited:visited})
 });
 
+//To redirect from index page to video call room
 app.post("/room", function(req, res){
     var name = req.body.Name;
     var newPark = {name: name};
@@ -36,12 +34,7 @@ app.post("/room", function(req, res){
  });
 
 
-
-/*app.get('/:room', (req,res, next) =>{
-    res.render('room', {roomId: req.params.room})
-})*/
-
-const users = {}
+const users = {} //Maintains the list of currently present users in video call
 
 io.on('connection', socket =>{
     socket.on('join-room', (roomId, userId) =>{
@@ -56,11 +49,15 @@ io.on('connection', socket =>{
 
     socket.on('new-user', name => {
         users[socket.id] = name
-        socket.broadcast.emit('user-connected', name)
-      })
-      socket.on('send-chat-message', message => {
+        socket.broadcast.emit('user-chatconnected', name)
+    })
+    socket.on('send-chat-message', message => {
         socket.broadcast.emit('chat-message', { message: message, name: users[socket.id] })
-      })
+    })
+
+    socket.on('raise-hand', () => {
+        io.to(roomId).emit('raiseHand', userName)
+    }); 
 
 })
 

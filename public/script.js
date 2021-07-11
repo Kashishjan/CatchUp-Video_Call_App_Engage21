@@ -1,11 +1,8 @@
 const socket = io('/');
-
-//Creating a video grid 
-const videoGrid = document.getElementById('video-grid');
-
+const videoGrid = document.getElementById('video-grid');    //Creating a video grid 
 const myVideo=document.createElement('video');
-//Muting my own video as I don't want to hear my own voice
-myVideo.muted = true;
+
+myVideo.muted = true;  //Muting my own video as I don't want to hear my own voice
 
 let myVideoStream
 //var peer = new Peer();
@@ -38,29 +35,12 @@ navigator.mediaDevices.getUserMedia({
         connectToNewUser(userId, stream);
     })
 
-    //function to chat
-    let msg = $('input');
-
-    $('html').keydown((e) => {
-    //Enter has key 13
-        if (e.which ==13 && msg.val().length !==0)
-        {
-            console.log(msg.val());
-            socket.emit('messsage', msg.val());
-            msg.val("");
-        }
-    });
-
-    socket.on('createMessage', (message) => {
-        console.log("created message" + message);
-        $('.messages').append(`<li class="message"><b>user</b></br>${message}</li>`);
-        scrollToBottom();
-    })
-
 });
 
-socket.on('user-disconnected' ,userId => {
+//To remove video of Disconnected users and intimate in the chat
+socket.on('user-disconnected' ,(userId, person) => {
     if (peers[userId]) peers[userId].close()
+    appendMessage(`${person} left`)
 })
 
 peer.on('open', id =>{
@@ -68,9 +48,7 @@ peer.on('open', id =>{
 })
 
 
-
-
-//function to add stream of new user
+//Function to add stream of new user
 const connectToNewUser = (userId, stream) =>{
     const call = peer.call(userId, stream)
     const video = document.createElement('video')
@@ -90,8 +68,7 @@ const addVideoStream = (video, stream) => {
     video.addEventListener('loadedmetadata', () =>{
         video.play();
     })
-    //Appending video to the grid
-    videoGrid.append(video); 
+    videoGrid.append(video);  //Appending video to the grid
 }
 
 const scrollToBottom = () => {
@@ -99,8 +76,9 @@ const scrollToBottom = () => {
     d.scrollTop(d.prop("scrolHeight"));
 }
 
-//mute button
-const muteUnmute = () => {
+//******************AUDIO MUTE FUNCTIONALITY******************
+//Function to mute/unmute audio
+const muteUnmuteAudio = () => {
     const enabled = myVideoStream.getAudioTracks()[0].enabled;
     if (enabled) {
         myVideoStream.getAudioTracks()[0].enabled = false;
@@ -112,6 +90,7 @@ const muteUnmute = () => {
     }
 }
 
+//change mute icon state 
 const setMuteButton = () =>{
     const html = `
     <i class="fas fa-microphone"></i>
@@ -119,6 +98,7 @@ const setMuteButton = () =>{
     `
     document.querySelector('.main_mute_button').innerHTML =html;
 }
+
 
 const setUnmuteButton = () => {
     const html =`
@@ -128,7 +108,10 @@ const setUnmuteButton = () => {
     document.querySelector('.main_mute_button').innerHTML =html;
 }
 
-const playStop =() =>{
+
+//******************VIDEO TOGGLE FUNCTIONALITY******************
+//Function to toggle Video
+const playStopVideo =() =>{
     console.log('object')
     let enabled = myVideoStream.getVideoTracks()[0].enabled;
     if (enabled) {
@@ -141,6 +124,7 @@ const playStop =() =>{
     }
 }
 
+//change video icon state
 const setPlayVideo = () =>{
     const html = `
     <i class="stop fas fa-video-slash"></i>
@@ -157,19 +141,10 @@ const setStopVideo = () =>{
     document.querySelector('.main_video_button').innerHTML =html;
 }
 
-//chat window toggle hide/unhide
-function openNav() {
-    document.getElementById("mySidenav").style.width = "320px";
-  }
-  function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-  }
 
-//SCREEN SHARE CODE
+//******************SCREEN SHARE Functionality***************************
   'use strict';
 
-  // Polyfill in Firefox.
-  // See https://blog.mozilla.org/webrtc/getdisplaymedia-now-available-in-adapter-js/
   if (adapter.browserDetails.browser == 'chrome') {
     adapter.browserShim.shimGetDisplayMedia(window, 'screen');
   }
@@ -178,9 +153,6 @@ function openNav() {
     startButton.disabled = true;
     const video = document.querySelector('video');
     video.srcObject = stream;
-  
-    // demonstrates how to detect that the user has stopped
-    // sharing the screen via the browser UI.
     stream.getVideoTracks()[0].addEventListener('ended', () => {
       errorMsg('The user has ended sharing the screen');
       startButton.disabled = false;
@@ -199,6 +171,7 @@ function openNav() {
     }
   }
   
+  //Function hit on Pressing Start Screen share button
   const startButton = document.getElementById('startButton');
   startButton.addEventListener('click', () => {
     navigator.mediaDevices.getDisplayMedia({video: true})
@@ -210,27 +183,24 @@ function openNav() {
   } else {
     errorMsg('getDisplayMedia is not supported');
   }
+  
 
-
-//TEXT CHAT 
+//******************TEXT CHAT FUNCTIONALITY******************
 const messageContainer = document.getElementById('message-container')
 const messageForm = document.getElementById('send-container')
 const messageInput = document.getElementById('message-input')
 
-const name = prompt('What is your name?')
+const new_name = prompt('What is your name?')
 appendMessage('You joined')
-socket.emit('new-user', name)
+socket.emit('new-user', new_name)
 
+//Transmitting messages by users in chat window
 socket.on('chat-message', data => {
   appendMessage(`${data.name}: ${data.message}`)
 })
 
-socket.on('user-connected', name => {
-  appendMessage(`${name} connected`)
-})
-
-socket.on('user-disconnected', name => {
-  appendMessage(`${name} disconnected`)
+socket.on('user-chatconnected', new_name => {
+  appendMessage(`${new_name} joined the Room`)
 })
 
 messageForm.addEventListener('submit', e => {
@@ -241,9 +211,39 @@ messageForm.addEventListener('submit', e => {
   messageInput.value = ''
 })
 
+//Append chat function
 function appendMessage(message) {
   const messageElement = document.createElement('div')
   messageElement.innerText = message
   messageContainer.append(messageElement)
 }
 
+
+
+//******************INVITE BUTTON FUNCTIONALITY******************
+
+const inviteButton = document.getElementById('copy_url');
+inviteButton.addEventListener("click", (e) => {
+  navigator.clipboard.writeText(window.location.href);
+  alert("Invite link copied to clipboard!");
+});
+
+
+//******************RAISE HAND BUTTON FUNCTIONALITY******************
+
+const raiseHand = document.getElementById('raiseHand');
+raiseHand.addEventListener("click", (e) => {
+  //emit through socket when button is clicked
+  appendMessage(`You: ✋`)
+  socket.emit('send-chat-message', `✋`)
+  alert(`${new_name}`+" raised hand: ✋")
+});
+
+
+//******************LEAVE MEET BUTTON FUNCTIONALITY******************
+
+function close_window() {
+  if (confirm("Close Window?")) {
+    close();
+  }
+}
