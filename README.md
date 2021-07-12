@@ -38,7 +38,7 @@ To run the app on local after clone the repository, follow these steps:
 3. Run the command ```Nodemon server.js``` on the terminal
 
 # Agile 101 Methadology Used
-Agile is the ability to create and respond to change. It is a way of dealing with, and ultimately succeeding in, an uncertain and turbulent environment. I foolowed the Agile Approach in this project following:
+Agile is the ability to create and respond to change. It is a way of dealing with, and ultimately succeeding in, an uncertain and turbulent environment. I undertook the following steps to follow agile methadology in the project:
 1. Prepared an Excel Sheet to divide the project timeline into smaller sprints (subtasks) so as to get a tangible output at the end of each sprint.
 2. Constant interaction with Microsoft mentor and making changes after their feedback (role of customer here).
 3. On the code level, writing code in functions so that changing and debugging them becomes easier.
