@@ -33,7 +33,7 @@ To run the app on local after clone the repository, follow these steps:
     path:'/peerjs',
     host: '/',
     port: '443'
-    });
+    });*/
     ```
 3. Run the command ```Nodemon server.js``` on the terminal
 
