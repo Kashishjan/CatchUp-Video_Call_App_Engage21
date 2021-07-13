@@ -48,4 +48,4 @@ Agile is the ability to create and respond to change. It is a way of dealing wit
 2. Constant interaction with Microsoft mentor and making changes after their feedback (role of customer here).
 3. On the code level, writing code in functions so that changing and debugging them becomes easier.
 4. Managing Backlog: Bug Fixing and Deliverables
-5. Being felxible to learn new things.
+5. Being flexible to learn new things.
