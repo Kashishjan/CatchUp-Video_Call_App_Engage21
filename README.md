@@ -28,7 +28,7 @@ After Login, share the room link with other participants for them to join.
 ![Login Page](https://github.com/Kashishjan/Video_Call_Final/blob/master/Screenshot%20(135).png)
 
 # Instructions After Cloning the Respository
-To run the app on local after clone the repository, follow these steps:
+To run the app on local after clone the repository, follow these steps inside VS code:
 1. ```npm install express```
 2. Open the public folder >> script.js file. Then paste the following code in exchange of lines 8-13 and save the changes:
    ```
