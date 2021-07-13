@@ -1,5 +1,5 @@
-# CathUp - Video_Call_App
-CathUp is an online video calling app that allows mutiple users to connect and have a meet online. This project was developed as a part of the Microsoft Engage Mentorship Program 2021. 
+# CatchUp - Video_Call_App
+CatchUp is an online video calling app that allows mutiple users to connect and have a meet online. This project was developed as a part of the Microsoft Engage Mentorship Program 2021. 
 
 Tech stack : It utilizes the power of WebRTC that provides web browsers and mobile applications with real-time communication via simple application programming interfaces. The other tech stack used includes Socket.io, PeerJS Library, UUID and Express server. The web development tools used are JavaScript, NodeJS, EJS, HTML and CSS.
 
