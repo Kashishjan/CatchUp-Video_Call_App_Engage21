@@ -40,6 +40,7 @@ To run the app on local after clone the repository, follow these steps:
     });*/
     ```
 3. Run the command ```Nodemon server.js``` on the terminal
+4. Open ```localhost:3030``` in the Browser
 
 # Agile 101 Methadology Used
 Agile is the ability to create and respond to change. It is a way of dealing with, and ultimately succeeding in, an uncertain and turbulent environment. I undertook the following steps to follow agile methadology in the project:
@@ -48,4 +49,3 @@ Agile is the ability to create and respond to change. It is a way of dealing wit
 3. On the code level, writing code in functions so that changing and debugging them becomes easier.
 4. Managing Backlog: Bug Fixing and Deliverables
 5. Being felxible to learn new things.
-
